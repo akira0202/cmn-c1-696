@@ -1,0 +1,22 @@
+# Runtime parameters — AgentRegistry loads this file separately from config/agent.yaml
+# and passes its contents as Graph(config=...). The static discovery manifest
+# (config/agent.yaml) must not carry runtime-tunable parameters.
+max_retry: 3
+timeout_seconds: 30
+
+# Deployment-supplied values — intentionally ABSENT here, not merely unset to a default.
+# `allowed_groups` is a mandatory allowlist: graph compile() raises ConfigError while it is
+# missing or empty, which is the fail-closed behaviour that keeps a forgotten allowlist from
+# becoming an implicit allow. Shipping a placeholder value would defeat that, so the keys are
+# listed below as documentation only. Add them, with the deployment's real values, in the
+# deployment's own copy of this file (docs/07 §Environment Variables / Configuration):
+#
+#   entra_tenant_id: "<tenant-guid>"
+#   entra_client_id: "<app-client-id>"
+#   allowed_groups:
+#     - "<exact Entra group display name>"
+#
+# Optional, code defaults apply when omitted:
+#   require_justification: false
+#   group_app_mapping_path: null
+#   appi_audit_logging: true
